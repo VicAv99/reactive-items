@@ -4,9 +4,13 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import HomeComponent from './home/home';
 import HeaderComponent from './common/header/header';
+import ItemsComponent from './items/items';
+import AboutComponent from './about/about';
 
 const routeComponents = [
-  { key: 1, path: '/home/', component: HomeComponent }
+  { key: 1, path: '/home/', component: HomeComponent },
+  { key: 2, path: '/items/', component: ItemsComponent },
+  { key: 3, path: '/about/', component: AboutComponent }
 ];
 
 const routes = routeComponents.map(route => (
@@ -16,7 +20,7 @@ const routes = routeComponents.map(route => (
 const AppRouter = () => (
   <Router>
     <div>
-      <HeaderComponent/>
+      <HeaderComponent />
       {routes}
     </div>
   </Router>
