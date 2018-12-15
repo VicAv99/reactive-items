@@ -21,4 +21,4 @@ const AppRouter = () => (
   </Router>
 );
 
-export default Router;
+export default AppRouter;
