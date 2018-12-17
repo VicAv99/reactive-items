@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 const links = [
   { path: '/home', label: 'HOME |' },
   { path: '/items', label: 'ITEMS |' },
+  { path: '/widgets', label: 'WIDGETS |' },
   { path: '/about', label: 'ABOUT' }
 ];
 
