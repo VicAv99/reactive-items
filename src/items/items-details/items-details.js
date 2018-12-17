@@ -13,16 +13,13 @@ class ItemsDetails extends Component {
       name: '',
       description: ''
     };
-
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onChange(event) {
+  onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  onSubmit(event) {
+  onSubmit = (event) => {
     event.preventDefault();
 
     const item = {
@@ -31,7 +28,17 @@ class ItemsDetails extends Component {
     }
 
     this.props.addItem(item);
+    this.reset()
   }
+
+  reset = () => {
+    this.setState({
+      ...this.state,
+      name: '',
+      description: ''
+    })
+  }
+
   render() {
     return (
       <div className="card p-4">
@@ -46,7 +53,7 @@ class ItemsDetails extends Component {
           </div>
           <div className="d-flex flex-row-reverse">
             <button type="submit" className="btn btn-info ml-1">Add Item</button>
-            <button type="reset" className="btn btn-secondary mr-1">Cancel</button>
+            <button type="reset" className="btn btn-secondary mr-1" onClick={this.reset}>Cancel</button>
           </div>
         </form>
       </div>
