@@ -5,25 +5,21 @@ import { connect } from 'react-redux';
 
 export class WidgetsDetails extends Component {
   static propTypes = {
-
+    widget: PropTypes.object
   }
 
   render() {
     return (
       <div>
-        details
+        {this.props.widget ? this.props.widget.name : ''}
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-
+  // widget: state.widgets.selectedWidget
 })
 
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(WidgetsDetails)
+export default connect(mapStateToProps, {})(WidgetsDetails)
 

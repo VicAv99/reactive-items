@@ -4,15 +4,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 export class WidgetsList extends Component {
+  selectWidgetChild = (widget) => {
+    this.props.emitSelectWidget(widget);
+  }
+
   static propTypes = {
-    widgets: PropTypes.array.isRequired
+    emitSelectWidget: PropTypes.func,
+    widgets: PropTypes.array,
+    widget: PropTypes.object
   }
 
   render() {
-    const { widgets } = this.props;
-    const widgetsList = widgets.map(widget =>
+    const widgetsList = this.props.widgets.map(widget =>
       <div key={widget.id} className="list-group">
-        <div className="list-group-item list-group-item-action">
+        <div onClick={() => this.selectWidgetChild(widget)} className="list-group-item list-group-item-action">
           {widget.name} <br/>
           {widget.description}
           <span className="badge badge-danger badge-pill float-right">
@@ -30,12 +35,9 @@ export class WidgetsList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  widgets: state.widgets.widgets
+  widgets: state.widgets.widgets,
+  widget: state.widgets.widget
 })
 
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(WidgetsList)
+export default connect(mapStateToProps, {})(WidgetsList)
 
