@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import './items-list.css';
 
 const ItemsList = ({ items }) => {
@@ -17,6 +19,10 @@ const ItemsList = ({ items }) => {
       {itemsList}
     </div>
   )
+}
+
+ItemsList.propTypes = {
+  item: PropTypes.object
 }
 
 export default ItemsList;
