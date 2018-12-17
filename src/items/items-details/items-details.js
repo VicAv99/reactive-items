@@ -24,11 +24,13 @@ class ItemsDetails extends Component {
 
     const item = {
       name: this.state.name,
-      description:  this.state.description
-    }
+      description: this.state.description
+    };
 
-    this.props.addItem(item);
-    this.reset()
+    if (this.formValid()) {
+      this.props.addItem(item);
+      this.reset();
+    };
   }
 
   reset = () => {
@@ -36,16 +38,24 @@ class ItemsDetails extends Component {
       ...this.state,
       name: '',
       description: ''
-    })
+    });
+  }
+
+  formValid = () => {
+    return this.state.name.length;
   }
 
   render() {
+    const errorMsg = !this.formValid() ?
+      <small className="text-danger">This field is required</small> :
+      ''
     return (
       <div className="card p-4">
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <input className="form-control" placeholder="Item Name" name="name"
               onChange={this.onChange} value={this.state.name} type="text" />
+            {errorMsg}
           </div>
           <div className="form-group">
             <input className="form-control" placeholder="Item Description" name="description"
