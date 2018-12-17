@@ -11,7 +11,7 @@ import AboutComponent from './about/about';
 const routeComponents = [
   { key: 1, path: '/home/', component: HomeComponent },
   { key: 2, path: '/items/', component: ItemsComponent },
-  { key: 3, path: '/items/', component: WidgetsComponent },
+  { key: 3, path: '/widgets/', component: WidgetsComponent },
   { key: 4, path: '/about/', component: AboutComponent }
 ];
 
