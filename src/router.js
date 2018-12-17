@@ -21,7 +21,8 @@ const AppRouter = () => (
   <Router>
     <div>
       <HeaderComponent />
-      <Route key="0" exact path="/" render={() => <Redirect key="4" to="/home" />}/>
+      <Route exact path="/" render={() => <Redirect to="/home" />} />
+      {/* <Route exact path="/**" render={() => <Redirect to="/home" />}/> */}
       {routes}
     </div>
   </Router>
