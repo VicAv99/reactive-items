@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import './items-list.css';
+import { deleteItem } from '../../state/actions/itemActions';
 
-const ItemsList = ({ items }) => {
-  const itemsList = items.map(item =>
-    <div key={item.id} className="list-group">
-      <div className="list-group-item list-group-item-action">
-        {item.name} <br/>
-        {item.description}
+class ItemsList extends Component {
+  render() {
+    const itemsList = this.props.items.map(item =>
+      <div key={item.id} className="list-group">
+        <div className="list-group-item list-group-item-action">
+          {item.name} <br/>
+          {item.description}
+          <span onClick={() => this.props.deleteItem(item.id)} className="badge badge-danger badge-pill float-right">
+            X
+          </span>
+        </div>
       </div>
-    </div>
-  )
+    )
 
-  return (
-    <div>
-      {itemsList}
-    </div>
-  )
+    return (
+      <div>
+        {itemsList}
+      </div>
+    )
+  }
 }
 
 ItemsList.propTypes = {
-  item: PropTypes.object
+  deleteItem: PropTypes.func.isRequired
 }
 
-export default ItemsList;
+export default connect(null, { deleteItem })(ItemsList);

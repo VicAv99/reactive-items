@@ -4,6 +4,7 @@ const URL = 'https://react-apps-api.herokuapp.com/items';
 
 export const FETCH_ITEMS = '[ITEM] Fetch Items';
 export const ADD_ITEM = '[ITEM] Add Item';
+export const DELETE_ITEM = '[ITEM] Delete Item';
 
 export const fetchItems = () => dispatch => {
   axios.get(URL)
@@ -16,7 +17,7 @@ export const fetchItems = () => dispatch => {
 };
 
 export const addItem = item => dispatch => {
-  axios.post(`${URL}`, item)
+  axios.post(URL, item)
     .then(item =>
       dispatch({
         type: ADD_ITEM,
@@ -24,3 +25,13 @@ export const addItem = item => dispatch => {
       })
     );
 };
+
+export const deleteItem = itemId => dispatch => {
+  axios.delete(`${URL}/${itemId}`)
+    .then(item =>
+      dispatch({
+        type: DELETE_ITEM,
+        payload: itemId
+      })
+    );
+}
