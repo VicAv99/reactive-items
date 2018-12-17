@@ -8,8 +8,13 @@ export class WidgetsList extends Component {
     this.props.emitSelectWidget(widget);
   }
 
+  deleted = widgetId => {
+    this.props.emitWidgetId(widgetId);
+  }
+
   static propTypes = {
     emitSelectWidget: PropTypes.func,
+    emitWidgetId: PropTypes.func,
     widgets: PropTypes.array,
     widget: PropTypes.object
   }
@@ -20,7 +25,7 @@ export class WidgetsList extends Component {
         <div onClick={() => this.selectWidgetChild(widget)} className="list-group-item list-group-item-action">
           {widget.name} <br/>
           {widget.description}
-          <span className="badge badge-danger badge-pill float-right">
+          <span onClick={() => this.deleted(widget.id)} className="badge badge-danger badge-pill float-right">
             X
           </span>
         </div>

@@ -25,3 +25,13 @@ export const fetchWidgets = () => dispatch => {
       })
     );
 }
+
+export const deleteWidget = widgetId => dispatch => {
+  axios.delete(`${URL}/${widgetId}`)
+    .then(widget =>
+      dispatch({
+        type: widgetTypes.DELETE_WIDGET,
+        payload: widgetId
+      })
+    )
+}

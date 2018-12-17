@@ -16,6 +16,12 @@ export default (state = initialState, action) => {
         widgets: action.payload
       };
     };
+    case widgetTypes.DELETE_WIDGET: {
+      return {
+        ...state,
+        widgets: state.widgets.filter(widget => widget.id !== action.payload)
+      };
+    };
   default:
     return state
   }
