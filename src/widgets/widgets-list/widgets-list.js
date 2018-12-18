@@ -12,13 +12,6 @@ export class WidgetsList extends Component {
     this.props.emitWidgetId(widgetId);
   }
 
-  static propTypes = {
-    emitSelectWidget: PropTypes.func,
-    emitWidgetId: PropTypes.func,
-    widgets: PropTypes.array,
-    widget: PropTypes.object
-  }
-
   render() {
     const widgetsList = this.props.widgets.map(widget =>
       <div key={widget.id} className="list-group">
@@ -37,6 +30,13 @@ export class WidgetsList extends Component {
       </div>
     )
   }
+}
+
+WidgetsList.propTypes = {
+  widget: PropTypes.object,
+  widgets: PropTypes.array,
+  emitWidgetId: PropTypes.func,
+  emitSelectWidget: PropTypes.func,
 }
 
 const mapStateToProps = (state) => ({
