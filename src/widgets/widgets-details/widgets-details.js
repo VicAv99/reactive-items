@@ -12,15 +12,6 @@ export class WidgetsDetails extends Component {
     };
   }
 
-  static propTypes = {
-    widget: PropTypes.object,
-    added: PropTypes.func,
-    name: PropTypes.string,
-    description: PropTypes.string,
-    updated: PropTypes.func,
-    id: PropTypes.number
-  }
-
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   }
@@ -34,7 +25,17 @@ export class WidgetsDetails extends Component {
       description: this.props.widget.description || this.state.description
     }
 
-    this.props.widget.id ? this.props.updated(widget) : this.props.added(widget);
+    if (this.props.widget.id) {
+      this.props.updated(widget);
+      this.reset();
+    } else {
+      this.props.added(widget);
+      this.reset();
+    }
+  }
+
+  reset = () => {
+    this.setState({...this.state, name: '', description: ''})
   }
 
   render() {
@@ -54,12 +55,21 @@ export class WidgetsDetails extends Component {
           </div>
           <div className="d-flex flex-row-reverse">
             <button type="submit" className="btn btn-info ml-1">Add Item</button>
-            <button type="reset" className="btn btn-secondary mr-1">Cancel</button>
+            <button type="reset" onClick={this.reset} className="btn btn-secondary mr-1">Cancel</button>
           </div>
         </form>
       </div>
     )
   }
+}
+
+WidgetsDetails.propTypes = {
+  id: PropTypes.number,
+  name: PropTypes.string,
+  description: PropTypes.string,
+  widget: PropTypes.object,
+  added: PropTypes.func,
+  updated: PropTypes.func,
 }
 
 const mapStateToProps = (state) => ({
