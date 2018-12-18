@@ -16,6 +16,18 @@ export default (state = initialState, action) => {
         widgets: action.payload
       };
     };
+    case widgetTypes.ADD_WIDGET: {
+      return {
+        ...state,
+        widgets: [...state.widgets, action.payload]
+      };
+    };
+    case widgetTypes.UPDATE_WIDGET: {
+      return {
+        ...state,
+        widgets: state.widgets.map(widget => widget.id === action.payload.id ? {...widget, ...action.payload}: widget)
+      }
+    }
     case widgetTypes.DELETE_WIDGET: {
       return {
         ...state,

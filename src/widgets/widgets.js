@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import './widgets.css';
 import WidgetsList from './widgets-list/widgets-list';
 import WidgetsDetails from './widgets-details/widgets-details';
-import { selectWidget, fetchWidgets, deleteWidget } from '../state/actions/widgetActions';
+import { selectWidget, fetchWidgets, deleteWidget, addWidget, updateWidget } from '../state/actions/widgetActions';
 
 export class WidgetsComponent extends Component {
   componentWillMount() {
@@ -17,15 +17,24 @@ export class WidgetsComponent extends Component {
     this.props.selectWidget(widget);
   }
 
+  addWidget = widget => {
+    this.props.addWidget(widget);
+  }
+
   deleteWidget = (widgetId) => {
     this.props.deleteWidget(widgetId);
+  }
+
+  updateWidget = widget => {
+    this.props.updateWidget(widget);
   }
 
   static propTypes = {
     selectWidget: PropTypes.func.isRequired,
     deleteWidget: PropTypes.func.isRequired,
     widgets: PropTypes.array,
-    selectedWidget: PropTypes.object
+    selectedWidget: PropTypes.object,
+    updateWidget: PropTypes.func.isRequired
   };
 
   render() {
@@ -36,7 +45,7 @@ export class WidgetsComponent extends Component {
           <WidgetsList widgets={widgets} emitSelectWidget={this.selectWidgetParent} emitWidgetId={this.deleteWidget} />
         </div>
         <div className="details-grid">
-          <WidgetsDetails widget={selectedWidget} />
+          <WidgetsDetails widget={selectedWidget} added={this.addWidget} updated={this.updateWidget} />
         </div>
       </div>
     )
@@ -51,7 +60,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   selectWidget,
   fetchWidgets,
-  deleteWidget
+  deleteWidget,
+  addWidget,
+  updateWidget
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WidgetsComponent);
